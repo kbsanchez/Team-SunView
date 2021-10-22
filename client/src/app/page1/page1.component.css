@@ -1,0 +1,70 @@
+.pageContainer{
+    height:100%;
+    background: rgb(247, 250, 252);
+    display: flex;
+}
+
+.pageContentContainer{
+    padding: 0vh;
+    width: 100%;
+    border: 1px solid green;
+}
+
+.listItem.selected{
+    background: rgb(247, 250, 252);
+    color: orange;
+}
+
+.sideBar{
+    height:100%;
+    width:13vw;
+    background: rgb(237, 242, 247);
+}
+
+.svLogo{
+    width: 93%;
+    padding: 2vh 1vh;
+}
+
+.listItem{
+    position: relative;
+    font-size: 19px;
+    color: rgb(131,132,135);
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    padding: 2vh 0;
+    cursor: pointer;
+}
+
+.listItem:hover{
+    color:rgba(228, 113, 30, 0.5);
+}
+
+.listItem:hover::before{
+    opacity: 0.5;
+    transform: scaleY(0.5);
+}
+
+.listItem::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width:5px;
+    top:0px;
+    left: 0;
+    background-color: rgb(228,112,30);
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.listItem.selected::before{
+    opacity: 1;
+    transform: scaleY(1);
+
+}
+
+.listItems{
+    margin-top: 2vh;
+}

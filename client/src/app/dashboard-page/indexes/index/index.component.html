@@ -1,0 +1,13 @@
+<form [formGroup] = "service.form" class = "normalForm">
+    <div class="controlContainer">
+        <input type="hidden" formControlName = "$key">
+        <mat-form-field style="margin: 2vh;">
+            <input  formControlName = "indexName" matInput placeholder="Index Name"  >
+            <mat-error>Index name is not entered </mat-error>
+        </mat-form-field>
+        <div class = "buttonRow">
+            <button mat-button class = "mat-button" style="margin: 0 2vh;" (click) = "onClear()">Cancel</button>
+            <button type = "submit" mat-raised-button class = "mat-raised-button" >Create</button>
+        </div>
+    </div>
+</form>

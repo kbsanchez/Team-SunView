@@ -1,0 +1,32 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* You can add global styles to this file, and also import other style files */
+html, body{
+    height:100%;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+.mat-raised-button {
+  color: #f0fff3;
+  background-color: #E4701E;
+}
+
+.mat-button {
+    color: #E4701E;
+}
+
+/* Change label color on focused */
+.mat-form-field.mat-focused .mat-form-field-label {
+   color: #E4701E !important;
+}
+  
+/* underline border color on focused */
+.mat-focused .mat-form-field-underline .mat-form-field-ripple{
+   background-color: #E4701E !important;
+}
+
+
