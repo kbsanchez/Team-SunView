@@ -30,5 +30,18 @@ async function listIndices() {
     return response
 }
 
-module.exports = { createIndex, getIndex, deleteIndex, listIndices }
+async function explainScore(indexName, docID, query) {
+    try {
+        const response = await elasticClient.explain({
+            id: docID,
+            index: indexName,
+            body: query
+        })
+        return response
+    } catch(err) {
+        return err
+    }
+}
+
+module.exports = { explainScore, createIndex, getIndex, deleteIndex, listIndices }
 
