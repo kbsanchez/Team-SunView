@@ -4,7 +4,7 @@ const router = express.Router()
 const { createIndex, getIndex, deleteIndex, listIndices } = require('../utils')
 
 router.put('/:index', (req, res) => {
-    createIndex(req.params.index)
+    createIndex(req.params.index, req.body)
     .then(response => res.send(response))
 })
 .get('/:index', (req, res) => {
