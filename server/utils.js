@@ -32,11 +32,7 @@ async function listIndices() {
 
 async function explainScore(indexName, docID, query) {
     try {
-        const response = await elasticClient.explain({
-            id: docID,
-            index: indexName,
-            body: query
-        })
+        const response = await elasticClient.explain(query)
         return response
     } catch(err) {
         return err
@@ -64,5 +60,16 @@ async function reIndex(source, dest) {
     }
 }
 
-module.exports = { reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
+async function bulkRequest(dataset, index) {
+    try {
+        const body = dataset.flatMap(doc => [{ index: { _index: index } }, doc])
+        const response = await elasticClient.bulk({refresh: true, body})
+        return response
+    } catch(err) {
+        return err
+    }
+    
+}
+
+module.exports = { bulkRequest, reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
 
