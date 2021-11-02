@@ -43,5 +43,26 @@ async function explainScore(indexName, docID, query) {
     }
 }
 
-module.exports = { explainScore, createIndex, getIndex, deleteIndex, listIndices }
+async function reIndex(source, dest) {
+    try {
+        const query = {
+            waitForCompletion: true,
+            refresh: true,
+            body: {
+                source: {
+                    index: source
+                },
+                dest: {
+                    index: dest
+                }
+            }
+        }
+        const response = await elasticClient.reindex(query)
+        return response
+    } catch(err) {
+        return err
+    }
+}
+
+module.exports = { reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
 
