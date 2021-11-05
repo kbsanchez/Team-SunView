@@ -1,12 +1,16 @@
 const elasticClient = require("./connection")
 
-async function createIndex(index, settings) {
-    const query = {
-        index,
-        body: settings
+async function createIndex(index, config) {
+    try {
+        const query = {
+            index,
+            body: config
+        }
+        const response = await elasticClient.indices.create(query)
+        return response
+    } catch(err) {
+        return err
     }
-    const response = await elasticClient.indices.create(query)
-    return response
 }
 
 async function getIndex(index) {
@@ -60,16 +64,33 @@ async function reIndex(source, dest) {
     }
 }
 
-async function bulkRequest(dataset, index) {
+async function getDocs(index) {
     try {
-        const body = dataset.flatMap(doc => [{ index: { _index: index } }, doc])
-        const response = await elasticClient.bulk({refresh: true, body})
+        const query = {
+            index
+        }
+        const response = await elasticClient.search(query)
         return response
     } catch(err) {
         return err
     }
-    
 }
 
-module.exports = { bulkRequest, reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
+async function bulkIndex(indexNames, dest) {
+        try {
+            const dataset = []
+            for (const currentIndex of indexNames) {
+                const response = await elasticClient.search({index: currentIndex})
+                const flattened = response.body.hits.hits.flatMap(doc => [{ index: { _index: dest } }, doc])
+                dataset.push(...flattened)
+            }
+            const response = await elasticClient.bulk({refresh: true, body: dataset})
+            return response
+        } catch(err) {
+            return err
+        }
+}
+
+
+module.exports = { getDocs, bulkIndex, reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
 
