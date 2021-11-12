@@ -1,0 +1,12 @@
+background{
+    background-color: rgb(247, 250, 252);
+}
+
+.header{
+    background-color:#fff;
+    margin: 0;
+    padding: 2.5vh;
+    width: 97%;
+    color: rgb(136, 147, 161);
+    font-size: 22px;
+}

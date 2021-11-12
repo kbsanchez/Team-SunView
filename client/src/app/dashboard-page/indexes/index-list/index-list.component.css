@@ -1,0 +1,37 @@
+.quickActions{
+    font-size: 13px;
+    color: #718096;
+    padding: .5vh ;
+    cursor: pointer;
+}
+
+.quickActions:hover{
+    color:rgb(228, 113, 30);
+}
+
+.header{
+    font-size: 15px;
+}
+
+.elements{
+    font-size: 13px;
+    color: #718096;
+}
+.mat-header-cell {
+    background: #edf2f7
+}
+
+.mat-table
+{
+  background-color:transparent!important;  
+}
+
+.hhh{
+  font-size: 18px;
+  color: #4a5568cb;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+  margin: 0 0 1.7vh 0 ;
+  padding:1vh; 
+  height: 5vh;
+}

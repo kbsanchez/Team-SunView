@@ -1,0 +1,27 @@
+<form [formGroup] = "service.form" class = "normalForm" (submit) = "onSubmit()">
+    <div class="controlContainer">
+        <div class = "head">
+            Create a new index:
+        </div>
+        <mat-form-field style="margin: 2vh; width:90%;">
+            <input formControlName = "indexName" matInput placeholder="Index Name"  >
+            <mat-error>Index name is not entered </mat-error>
+        </mat-form-field>
+        <mat-form-field class="dth" style="margin: 2vh; width:90%;" appearance="fill">
+            <mat-label>Enter Settings</mat-label>
+            <textarea style = 'height: 17vh;' matInput placeholder="Settings..." formControlName = "optSettings"
+>{
+    "settings": {
+        "index": {
+        "number_of_shards": 3,
+        "number_of_replicas": 2 
+        }
+    }
+}</textarea>
+          </mat-form-field>
+        <div class = "buttonRow">
+            <button mat-button class = "mat-button" style="margin: 0 2vh;" (click) = "onClear()">Clear</button>
+            <button type = "submit" mat-raised-button class = "mat-raised-button" >Create</button>
+        </div>
+    </div>
+</form>

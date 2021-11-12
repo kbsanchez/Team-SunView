@@ -1,0 +1,40 @@
+<div class="header">TroubleShoot Queries</div>
+
+<form [formGroup] = "tsqService.form" class = "normalForm" (submit) = "onSubmit()">
+    <div class="controlContainer">
+        <div class = "head">
+            Step 1:
+        </div>
+        <mat-form-field style="margin: 2vh; width:20%;">
+            <input formControlName = "indexName" matInput placeholder="Index Name"  >
+            <mat-error>Index name is not entered </mat-error>
+        </mat-form-field>
+        <div class = "head">
+            Step 2:
+        </div>
+        <mat-form-field style="margin: 2vh; width:20%;">
+            <input  formControlName = "documentName" matInput placeholder="Document ID"  >
+            <mat-error>Document ID is not entered </mat-error>
+        </mat-form-field>
+        <div class = "head">
+            Step 3:
+        </div>
+        <mat-form-field style="margin: 2vh; width:15%;">
+            <input  formControlName = "keyID" matInput placeholder="Enter key..."  >
+            <mat-error>Key is not entered </mat-error>
+        </mat-form-field>
+        <mat-form-field style="margin: 2vh; width:15%;">
+            <input  formControlName = "valueID" matInput placeholder="Enter value..."  >
+            <mat-error>Value is not entered </mat-error>
+        </mat-form-field>
+        <div class = "buttonRow">
+            <button mat-button class = "mat-button" style="margin: 0 2vh;" (click) = "onClear()">Clear</button>
+            <button type = "submit" mat-raised-button class = "mat-raised-button" >Explain</button>
+        </div>
+    </div>
+</form>
+
+<div  id="output">
+    <pre> {{ jsonData |json }} </pre>
+</div>
+

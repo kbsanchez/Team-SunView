@@ -1,0 +1,14 @@
+<div class="pageContainer">
+    <div class="sideBar">
+        <img src="/assets/SunViewLogo.png" alt="SunViewLogo" class="svLogo">
+        <div class="listItems">
+            <a routerLink = "/Dashboard" routerLinkActive = "selected" class="listItem">Dashboard</a>
+            <a routerLink = "/TroubleShootQueries" routerLinkActive = "selected" class="listItem">TroubleShoot Queries</a>
+            <a routerLink = "/ReindexScheduler" routerLinkActive = "selected" class="listItem">Re-index Scheduler</a>
+        </div>
+
+    </div>
+    <div class="pageContentContainer">
+        <router-outlet></router-outlet> 
+    </div>
+</div>

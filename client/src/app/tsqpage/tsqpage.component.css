@@ -1,0 +1,38 @@
+background{
+    background-color: rgb(247, 250, 252);
+}
+
+.header{
+    background-color:#fff;
+    margin: 0 0 3vh 0;
+    padding: 2.5vh;
+    width: 97%;
+    color: rgb(136, 147, 161);
+    font-size: 22px;
+}
+
+.normalForm{
+    margin: 10px;
+}
+
+.controlContainer{
+    width: 100%;
+}
+
+.head{
+    font-size: 26px;
+    font-weight: bold;
+    color: #717174;
+}
+
+#output{
+    margin: 3vh;
+    background-color: #fff;
+    padding: 3vh;
+    display: none;
+}
+
+.head{
+    margin-left: 2vh;
+}
+
