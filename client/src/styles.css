@@ -43,3 +43,14 @@ snack-bar-container.notification simple-snack-bar{
     font-size: 18px !important;
     font-weight: bold;
 }
+
+/* bananas and peaches fix the responsivness issues in the dashboard page */
+
+.bananas {
+    width:100% !important;
+    display: inline-block !important;
+}
+
+.peaches {
+    overflow-y: auto !important;
+}

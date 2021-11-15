@@ -17,7 +17,7 @@ export class IndexListComponent implements OnInit {
     private dialogService: DialogService ) { }
 
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['check', 'name', 'numDocs', 'size', 'quickActions'];
+  displayedColumns: string[] = ['check', 'name', 'numDocs', 'size', 'quickActions', 'type'];
   @ViewChild(MatSort) sort:MatSort;
 
   ngOnInit(): void {
