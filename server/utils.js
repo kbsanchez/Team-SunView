@@ -79,10 +79,11 @@ async function reIndex(source, dest) {
     }
 }
 
-async function getDocs(index) {
+async function searchIndex(index, body) {
     try {
         const query = {
-            index
+            index,
+            body
         }
         const response = await elasticClient.search(query)
         return response
@@ -107,5 +108,5 @@ async function bulkIndex(indexNames, dest) {
 }
 
 
-module.exports = { insertDoc, getDocs, bulkIndex, reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
+module.exports = { insertDoc, searchIndex, bulkIndex, reIndex, explainScore, createIndex, getIndex, deleteIndex, listIndices }
 

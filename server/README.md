@@ -74,3 +74,16 @@ Bulk indexing
     "indices": ["my_first_index", "my_second_index", "my_third_index"]
 }
 ```
+Searching an index
+
+    GET localhost:5000/api/index/my_amazing_index/search
+```JavaScript
+// searches an index against the specified query
+{
+  "query": {
+    "match": {
+      "category": "Men's Clothing"
+    }
+  }
+}
+```
