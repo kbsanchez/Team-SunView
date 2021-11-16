@@ -74,16 +74,6 @@ Bulk indexing
     "indices": ["my_first_index", "my_second_index", "my_third_index"]
 }
 ```
-Searching an index
+Get the index type specified when you first created the index
 
-    GET localhost:5000/api/index/my_amazing_index/search
-```JavaScript
-// searches an index against the specified query
-{
-  "query": {
-    "match": {
-      "category": "Men's Clothing"
-    }
-  }
-}
-```
+    GET localhost:5000/api/index/my_first_index/type

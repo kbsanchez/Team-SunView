@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { insertDoc, createIndex, getIndex, deleteIndex, listIndices, searchIndex } = require('../utils')
+const { insertDoc, createIndex, getIndex, deleteIndex, listIndices, getType } = require('../utils')
 
 router.put('/:index', (req, res) => {
     createIndex(req.params.index, {
@@ -33,14 +33,18 @@ router.put('/:index', (req, res) => {
         res.send(response.body)
     })
 })
-.get('/:index/search', (req, res) => {
-    searchIndex(req.params.index, req.body)
+.get('/:index/type', (req, res) => {
+    getType(req.params.index)
     .then(response => {
         const { statusCode } = response
         if(statusCode != 200)
             res.status(statusCode).send(`Response returned with errors: status code ${statusCode}`)
-        else
-            res.send(response)
+        else 
+            response.body.hits.hits.forEach(doc => {
+                if(doc._source.indexType !== undefined)
+                    res.send(doc._source.indexType)
+            })
+            
     })
 })
 
