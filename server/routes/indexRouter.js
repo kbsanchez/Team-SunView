@@ -39,11 +39,14 @@ router.put('/:index', (req, res) => {
         const { statusCode } = response
         if(statusCode != 200)
             res.status(statusCode).send(`Response returned with errors: status code ${statusCode}`)
-        else 
+        else {
+            let indexType = "_doc"
             response.body.hits.hits.forEach(doc => {
                 if(doc._source.indexType !== undefined)
-                    res.send(doc._source.indexType)
+                    indexType = doc._source.indexType
             })
+            res.send(indexType)
+        }
             
     })
 })
