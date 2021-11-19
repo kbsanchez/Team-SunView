@@ -1,0 +1,28 @@
+<form [formGroup] = "service.form" class = "normalForm" (submit) = "onReindex()">
+    <div class="controlContainer">
+        <div class = "head">
+            Re-index Current Index to:
+        </div>
+        <mat-form-field style="margin: 2vh; width:90%;">
+            <input formControlName = "destIndex" matInput placeholder="Destination Index" [matAutocomplete]="auto" >
+            <mat-error>Index name is not entered </mat-error>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let d of dis" [value]="d">
+                  {{d}}
+                </mat-option>
+              </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-checkbox class="ckbx" (change)="checkB($event.checked)">Settings</mat-checkbox>
+
+        <mat-form-field id = "sett"  style="margin: 2vh; width:90%;display: none;" appearance="fill">
+            <mat-label>Enter Settings</mat-label>
+            <textarea style = 'height: 17vh;' matInput placeholder="Settings..." formControlName = "optSettings"></textarea>
+        </mat-form-field>
+
+        <div class = "buttonRow">
+            <button mat-button class = "mat-button" style="margin: 0 2vh;" (click) = "onClear()">Clear</button>
+            <button type = "submit" mat-raised-button class = "mat-raised-button" >Re-index</button>
+        </div>
+    </div>
+</form>

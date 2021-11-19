@@ -54,3 +54,12 @@ snack-bar-container.notification simple-snack-bar{
 .peaches {
     overflow-y: auto !important;
 }
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #e4711ee8;
+} 
+
+.mat-checkbox-ripple{
+    display: none;
+}

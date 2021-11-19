@@ -4,9 +4,9 @@
             My indices 
             <mat-form-field style = "margin-left:4vh ;">
                 <mat-label>Bulk Actions</mat-label>
-                <mat-select>
-                  <mat-option value="Bulk">Reindex</mat-option>
-                  <mat-option value="Delete">Delete</mat-option>
+                <mat-select #sel (valueChange)="bulkActions(sel.value)">
+                  <mat-option (click) = onBulk() value="0">Re-index</mat-option>
+                  <mat-option value="1">Delete</mat-option>
                 </mat-select>
             </mat-form-field>
         </div> 
@@ -17,10 +17,10 @@
     
     <mat-table [dataSource] = "listData" matSort class = "table bananas">
         
-        <ng-container matColumnDef = "check" style = "margin: 0;" >
-            <mat-header-cell *matHeaderCellDef class = "header" mat-sort-header>Check</mat-header-cell>
+        <ng-container matColumnDef = "check"  style = "margin: 0;" >
+            <mat-header-cell *matHeaderCellDef class = "header" mat-sort-header> ✓</mat-header-cell>
             <mat-cell *matCellDef = "let element" class = "elements" >
-                <mat-checkbox ></mat-checkbox>
+                <mat-checkbox (change) = "onCheckBox(element.index)"></mat-checkbox>
             </mat-cell>
         </ng-container>
         
@@ -47,7 +47,7 @@
         <ng-container matColumnDef = "quickActions" >
             <mat-header-cell *matHeaderCellDef class = "header">Quick actions</mat-header-cell>
             <mat-cell *matCellDef = "let row">
-                <a class = "quickActions">Reindex</a> 
+                <a class = "quickActions"  (click) = "onReindex(row.index)">Reindex</a> 
                 <a (click) = onDelete(row.index) class = "quickActions">Delete</a>            
             </mat-cell>
         </ng-container>

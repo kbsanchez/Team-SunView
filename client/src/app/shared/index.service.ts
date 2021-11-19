@@ -20,12 +20,13 @@ export class IndexService {
       indexName: '',
       optSettings:
 `{
-  "settings": {
-      "index": {
-        "number_of_shards": 3,
-        "number_of_replicas": 2 
-      }
-  }
+    "config": {
+        "settings": {
+            "number_of_shards": 3,
+            "number_of_replicas": 2
+        },
+        "indexType": "Article"
+    }
 }`
     });  
   }
@@ -42,16 +43,10 @@ export class IndexService {
     const endpointURL = 'http://localhost:5000/api/index/' + indexName;
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
-    console.log(optSettings);
+    var json = JSON.parse(optSettings);
+    //console.log(json);
 
-    this.httpClient.put(endpointURL, {
-      "settings": {
-          "index": {
-          "number_of_shards": 3,
-          "number_of_replicas": 2 
-          }
-      }
-  }).subscribe(
+    this.httpClient.put(endpointURL, json).subscribe(
       (response) => {
         console.log(response);
         this.NotificationService.success("Succ");
@@ -65,13 +60,12 @@ export class IndexService {
   
   deleteIndex(indexName){
     const endPointURL = 'http://localhost:5000/api/index/' + indexName;
-    console.log(endPointURL);
+    //console.log(endPointURL);
 
     this.httpClient.delete(endPointURL, {}).subscribe(
       (response) => {
         console.log(response);
         this.NotificationService.delete("Deleted Successfully!");
-        window.location.reload()
         return response;
       }, (err)=>{
         console.log(err);
@@ -79,7 +73,10 @@ export class IndexService {
     )
   }
 
-
-
-
+  deleteMultiple(indexList:any){
+    for (let i = 0; i < indexList.length; i++){
+      this.deleteIndex(indexList[i]);
+    }
+  }
+  
 }

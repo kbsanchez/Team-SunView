@@ -9,16 +9,8 @@
         </mat-form-field>
         <mat-form-field class="dth" style="margin: 2vh; width:90%;" appearance="fill">
             <mat-label>Enter Settings</mat-label>
-            <textarea style = 'height: 17vh;' matInput placeholder="Settings..." formControlName = "optSettings"
->{
-    "settings": {
-        "index": {
-        "number_of_shards": 3,
-        "number_of_replicas": 2 
-        }
-    }
-}</textarea>
-          </mat-form-field>
+            <textarea style = 'height: 17vh;' matInput placeholder="Settings..." formControlName = "optSettings"></textarea>
+        </mat-form-field>
         <div class = "buttonRow">
             <button mat-button class = "mat-button" style="margin: 0 2vh;" (click) = "onClear()">Clear</button>
             <button type = "submit" mat-raised-button class = "mat-raised-button" >Create</button>

@@ -35,3 +35,7 @@
   padding:1vh; 
   height: 5vh;
 }
+
+.mat-column-check {
+   flex: 0 0 50px;
+  }

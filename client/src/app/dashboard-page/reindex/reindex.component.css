@@ -1,0 +1,23 @@
+.normalForm{
+    margin: 10px;
+}
+
+.controlContainer{
+    width: 100%;
+}
+
+.head{
+    font-size: 26px;
+    font-weight: bold;
+
+}
+
+.buttonRow{
+    float: right;
+    margin-right: 1.7vw;
+}
+
+.ckbx{
+    margin-left: 1.5vw;
+    width: 100%;
+}

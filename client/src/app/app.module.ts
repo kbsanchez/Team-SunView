@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { IndexListComponent } from './dashboard-page/indexes/index-list/index-list.component';
 import { MatConfirmDialogComponent } from './dashboard-page/mat-confirm-dialog/mat-confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReindexComponent } from './dashboard-page/reindex/reindex.component';
+import { BulkComponent } from './dashboard-page/bulk/bulk.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     IndexComponent,
     IndexListComponent,
     MatConfirmDialogComponent,
+    ReindexComponent,
+    BulkComponent,
     ],
   imports: [
     BrowserModule,

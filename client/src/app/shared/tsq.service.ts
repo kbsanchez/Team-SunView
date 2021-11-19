@@ -26,20 +26,13 @@ export class TsqService {
     });  
   }
   
-  getData(index: string, document: string, category: string, b: string){
+  getData(index: string, document: string, kkk: string, vvv: string){
 
     const endpointURL = 'http://localhost:5000/api/explain/'+index+'/'+document;
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
-    var temp = category + ":" + b;
-    console.log(temp);
-    return this.httpClient.post(endpointURL,
-    {
-      query : {
-        match : { category : b }
-      }
-    });
+    var temp = '{"query" : {"match" : { "'+kkk+'" : "'+vvv+'" }}}';
+    console.log(JSON.parse(temp));
+    return this.httpClient.post(endpointURL,JSON.parse(temp));
   }
-
-
 }
