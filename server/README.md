@@ -77,3 +77,22 @@ Bulk indexing
 Get the index type specified when you first created the index
 
     GET localhost:5000/api/index/my_first_index/type
+
+Schedule a re index task
+
+    POST localhost:5000/api/scheduler
+
+```JavaScript
+// the body of the request
+{
+    "scheduledJob": {
+        "dayOfWeek": 2,
+        "month": 11,
+        "dayOfMonth": 23,
+        "hour": "14",
+        "minute": "42",
+        "source": "kibana_sample_data_ecommerce",
+        "dest": "my_source_index"
+    }
+}
+```

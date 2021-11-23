@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 5000
 const cors = require('cors')
 const indexRouter = require('./routes/indexRouter')
 const { explainScore, reIndex, deleteIndex, bulkIndex } = require('./utils')
+const cron = require('node-cron')
 
 app.use(cors())
 app.use(express.json())
@@ -45,11 +46,23 @@ app.post('/api/bulk/:dest', (req, res) => {
     })
 })
 
-// if(process.env.NODE_ENV === "production") {
-//     app.use(express.static('./dist/'))
-//     app.get("*", (req, res) => {
-//       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-//     });
-// }
+app.post('/api/scheduler', (req, res) => {
+    const { minute, hour, dayOfMonth, month, dayOfWeek, source, dest } = req.body.scheduledJob
+    const task = cron.schedule(`${minute} ${hour} ${dayOfMonth} ${month} ${dayOfWeek}`, () => {
+        reIndex(source, dest)
+        .then(response => {
+            const { statusCode } = response
+            if(statusCode != 200)
+                console.log(`Task failed: status code ${statusCode}`)
+            else 
+                console.log(`${source} reindexed to ${dest}!`)
+        })
+    }, {
+        scheduled: true,
+        timezone: 'America/Nassau'
+    })
+    task.start()
+    console.log("Task scheduled..")
+})
 
 app.listen(PORT, () => console.log('running on port ' + PORT))
