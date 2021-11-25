@@ -11,6 +11,9 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {     MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -26,7 +29,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule, 
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule 
+  
   ],
   exports:[
     MatToolbarModule,
@@ -39,7 +46,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatCardModule,
   ]
 })
 export class MaterialModule { }

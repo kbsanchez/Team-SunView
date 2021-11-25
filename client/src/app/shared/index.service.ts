@@ -38,7 +38,25 @@ export class IndexService {
     return this.httpClient.get('http://localhost:5000/api/index');
   }
 
-  insertIndex(indexName, optSettings){
+  insertIndex(indexName){
+
+    const endpointURL = 'http://localhost:5000/api/index/' + indexName;
+    const httpHeaders = new HttpHeaders();
+    httpHeaders.append('content-type', 'application/json');
+    
+    this.httpClient.put(endpointURL,{}).subscribe(
+      (response) => {
+        console.log(response);
+        this.NotificationService.success("Succ");
+        window.location.reload()
+        return response;
+      }, (err)=>{
+        console.log(err);
+      }
+    )
+  }
+
+  insertIndexv2(indexName, optSettings){
 
     const endpointURL = 'http://localhost:5000/api/index/' + indexName;
     const httpHeaders = new HttpHeaders();

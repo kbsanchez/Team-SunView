@@ -22,7 +22,11 @@ export class IndexComponent implements OnInit {
 
   onSubmit(){
     if(this.service.form.valid){
-      this.service.insertIndex(this.service.form.value.indexName, this.service.form.value.optSettings);
+      if(this.checked){
+        this.service.insertIndexv2(this.service.form.value.indexName, this.service.form.value.optSettings);
+      }else{
+        this.service.insertIndex(this.service.form.value.indexName);
+      }
       this.service.form.reset();
       this.service.initializeFormGroup();
       this.onClose();
@@ -33,6 +37,18 @@ export class IndexComponent implements OnInit {
     this.service.form.reset;
     this.service.initializeFormGroup();
     this.dialogRef.close();
+  }
+
+  checked:boolean = false;
+
+  checkB(completed: boolean){
+    if(completed){
+      this.checked = true;
+      document.getElementById("sett").style.display = "block";
+    }else{
+      this.checked = false;
+      document.getElementById("sett").style.display = "none";
+    }
   }
 
 }

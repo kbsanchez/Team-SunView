@@ -1,1 +1,52 @@
 <div class="header">Re-index Scheduler</div>
+
+<form [formGroup] = "service.form" class = "normalForm" (submit) = "onSubmit()">
+    <div class="header">
+        
+        <div class = "head">
+            Select Date:
+        </div>
+
+        <mat-card class="demo-inline-calendar-card">
+            <mat-calendar (selectedChange)="onSelected($event)"></mat-calendar>
+        </mat-card>
+        <p id="date"></p>
+            
+        <div class = "head" style="margin: 2vh 0 0 0 ;">
+            Select Time:
+        </div>
+
+        <mat-form-field style="margin: 0 ; width:20%;">
+            <input formControlName = "time" matInput type="time"  min="09:00" max="18:00" required>
+        </mat-form-field>
+
+        <br>
+        
+        <mat-form-field style="margin: 1vh 0 ; width:20%;">
+            <input formControlName = "source" matInput placeholder="Source Index Name" [matAutocomplete]="auto" >
+            <mat-error>Index name is not entered </mat-error>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let d of dis" [value]="d">
+                  {{d}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field style="margin: 1vh; width:20%;">
+            <input formControlName = "dest" matInput placeholder="Destination Index Name" [matAutocomplete]="auto" >
+            <mat-error>Index name is not entered </mat-error>
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let d of dis" [value]="d">
+                  {{d}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div class = "buttonRow">
+            <button mat-button class = "mat-button" style="margin: 2vh 2vh 0 0  ;" (click) = "onClear()">Clear</button>
+            <button type = "submit" mat-raised-button class = "mat-raised-button" >Schedule</button>
+        </div>
+    </div>
+</form>
+
+  

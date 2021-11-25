@@ -7,7 +7,10 @@
             <input formControlName = "indexName" matInput placeholder="Index Name"  >
             <mat-error>Index name is not entered </mat-error>
         </mat-form-field>
-        <mat-form-field class="dth" style="margin: 2vh; width:90%;" appearance="fill">
+
+        <mat-checkbox class="ckbx" (change)="checkB($event.checked)">Settings</mat-checkbox>
+
+        <mat-form-field id = "sett" style="margin: 2vh; width:90%;display: none;" appearance="fill">
             <mat-label>Enter Settings</mat-label>
             <textarea style = 'height: 17vh;' matInput placeholder="Settings..." formControlName = "optSettings"></textarea>
         </mat-form-field>

@@ -40,7 +40,6 @@ export class IndexListComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "30%";
-    dialogConfig.height = "55%";
     this.dialog.open(IndexComponent, dialogConfig);
   }
 
@@ -56,12 +55,10 @@ export class IndexListComponent implements OnInit {
   }
 
   onDelete(indexName){
-    if(this.selectedIndexes.length > 0){
-      if(confirm('are you sure you want to delete?')){
-        this.service.deleteIndex(indexName);
-      }
-      window.location.reload()
+    if(confirm('are you sure you want to delete?')){
+      this.service.deleteIndex(indexName);
     }
+    window.location.reload();
     //this.dialogService.openConfirmDialog();
   }
 
@@ -72,10 +69,12 @@ export class IndexListComponent implements OnInit {
   }
 
   bulkActions(sel){
-    if(sel == "1"){
-      if(confirm('are you sure you want to delete?')){
-       this.service.deleteMultiple(this.selectedIndexes);
-       window.location.reload()
+    if(this.selectedIndexes.length > 0){
+      if(sel == "1"){
+        if(confirm('are you sure you want to delete?')){
+        this.service.deleteMultiple(this.selectedIndexes);
+        window.location.reload()
+        }
       }
     }
   }
