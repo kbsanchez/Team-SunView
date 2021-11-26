@@ -48,21 +48,28 @@ app.post('/api/bulk/:dest', (req, res) => {
 
 app.post('/api/scheduler', (req, res) => {
     const { minute, hour, dayOfMonth, month, dayOfWeek, source, dest } = req.body.scheduledJob
-    const task = cron.schedule(`${minute} ${hour} ${dayOfMonth} ${month} ${dayOfWeek}`, () => {
-        reIndex(source, dest)
-        .then(response => {
-            const { statusCode } = response
-            if(statusCode != 200)
-                console.log(`Task failed: status code ${statusCode}`)
-            else 
-                console.log(`${source} reindexed to ${dest}!`)
+    try {
+        const task = cron.schedule(`${minute} ${hour} ${dayOfMonth} ${month} ${dayOfWeek}`, () => {
+            reIndex(source, dest)
+            .then(response => {
+                const { statusCode } = response
+                if(statusCode != 200)
+                    console.log(statusCode).send(`Response returned with errors: status code ${statusCode}`)
+                else {
+                    deleteIndex(source)
+                    console.log(`${source} deleted and reindexed to ${dest}!`)
+                }
+            })
+        }, {
+            scheduled: true,
+            timezone: 'America/Nassau'
         })
-    }, {
-        scheduled: true,
-        timezone: 'America/Nassau'
-    })
-    task.start()
-    console.log("Task scheduled..")
+        task.start()
+        console.log('Task scheduled...')
+        res.send('Task scheduled...')
+    } catch(error) {
+        res.send(error)
+    }
 })
 
 app.listen(PORT, () => console.log('running on port ' + PORT))
