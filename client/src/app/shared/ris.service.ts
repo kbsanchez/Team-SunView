@@ -44,7 +44,7 @@ export class RisService {
     var json = JSON.parse(body);
     //console.log(json);
 
-    this.httpClient.post(endpointURL, json).subscribe(
+    this.httpClient.post(endpointURL, json, {responseType: 'text'}).subscribe(
       (response) => {
         console.log(response);
         //window.location.reload()
@@ -53,7 +53,6 @@ export class RisService {
         console.log(err);
       }
     )
-
   }
 
 }

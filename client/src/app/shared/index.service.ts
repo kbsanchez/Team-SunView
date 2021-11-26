@@ -43,8 +43,19 @@ export class IndexService {
     const endpointURL = 'http://localhost:5000/api/index/' + indexName;
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
+
+    var optSettings = 
+    `{
+      "config": {
+          "settings": {
+          },
+          "indexType": "Article"
+      }
+    }`
+    var json = JSON.parse(optSettings);
+
     
-    this.httpClient.put(endpointURL,{}).subscribe(
+    this.httpClient.put(endpointURL, json).subscribe(
       (response) => {
         console.log(response);
         this.NotificationService.success("Succ");

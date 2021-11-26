@@ -46,6 +46,7 @@ export class RISPageComponent implements OnInit {
         this.service.form.value.source,
         this.service.form.value.dest
       );
+      this.NotificationService.success("Successfully Scheduled");
     }else{      
       this.NotificationService.delete("Please fill out all the Forms");
       //window.location.reload();
