@@ -3,7 +3,6 @@ const elasticClient = require("./connection")
 async function insertDoc(index, body) {
     const query = {
         index,
-        id: '12345678',
         body
     }
     const response = await elasticClient.index(query)
@@ -92,18 +91,19 @@ async function getType(index) {
 }
 
 async function bulkIndex(indexNames, dest) {
-        try {
-            const dataset = []
-            for (const currentIndex of indexNames) {
-                const response = await elasticClient.search({index: currentIndex})
-                const flattened = response.body.hits.hits.flatMap(doc => [{ index: { _index: dest } }, doc])
-                dataset.push(...flattened)
-            }
-            const response = await elasticClient.bulk({refresh: true, body: dataset})
-            return response
-        } catch(err) {
-            return err
+    try {
+        const dataset = []
+        for (const currentIndexName of indexNames) {
+            const response = await elasticClient.search({index: currentIndexName})
+            const flattened = response.body.hits.hits.flatMap(doc => [{ index: { _index: dest } }, doc["_source"]])
+            dataset.push(...flattened)
         }
+        console.log(dataset)
+        const response = await elasticClient.bulk({refresh: true, body: dataset})
+        return response
+    } catch(err) {
+        return err
+    }
 }
 
 
