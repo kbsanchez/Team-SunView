@@ -91,31 +91,38 @@ export class ReindexService {
 
   receiveData(list){
     for (let i = 0; i < list.length; i++){
-      this.selectedIndexes.push('"'+list[i]+'"');
+      this.selectedIndexes.push(list[i]);
     }
   }
 
-  bulkReindex(destIndex){
-    const endpointURL = 'http://localhost:5000/api/bulk/'+destIndex;
+  // bulkReindex = destIndex => new Promise(resolve => {
+  //   const httpHeaders = new HttpHeaders();
+  //   httpHeaders.append('content-type', 'application/json');
+  //   for (let i = 0; i < this.selectedIndexes.length; i++) {
+  //     const endpointURL = 'http://localhost:5000/api/reindex/'+this.selectedIndexes[i]+'/'+destIndex;
+  //     this.httpClient.post(endpointURL,"", {responseType: 'text'})
+  //     .subscribe(response => console.log(response), err => console.log(err))
+  //   }
+  //   // resolve after for loop is done
+  //   resolve(true)
+  // })
 
+  bulkReindex(destIndex){
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
+    for (let i = 0; i < this.selectedIndexes.length; i++){
+      const endpointURL = 'http://localhost:5000/api/reindex/'+this.selectedIndexes[i]+'/'+destIndex;
 
-    var body = '{"indices": [' + this.selectedIndexes + ']}'
-    var json = JSON.parse(body);
-
-    console.log(json);
-  
-    this.httpClient.post(endpointURL,json, {responseType: 'text'}).subscribe(
-      (response) => {
-        console.log(response);
-        this.NotificationService.success("Succesfully Bulk Reindexed");
-        //window.location.reload()
-        return response;
-      }, (err)=>{
-        console.log(err);
-      }
-    )
+      this.httpClient.post(endpointURL,"", {responseType: 'text'}).subscribe(
+        (response) => {
+          console.log(response);
+          this.NotificationService.success(response);
+        }, (err)=>{
+          console.log(err);
+        }
+      )
+    }
+    this.NotificationService.success("Refresh page!");
   }
 
   bulkReindexv2(destIndex, optSettings){
@@ -123,35 +130,28 @@ export class ReindexService {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
     var json = JSON.parse(optSettings);
-    console.log(json);
 
     this.httpClient.put(endpointURL, json).subscribe(
       (response) => {
         console.log(response);
-        return response;
-      }, (err)=>{
+      },(err)=>{
         console.log(err);
       }
     )
 
-    const endpointURL1 = 'http://localhost:5000/api/bulk/'+destIndex;
+    for (let i = 0; i < this.selectedIndexes.length; i++){
+      const endpointURL = 'http://localhost:5000/api/reindex/'+this.selectedIndexes[i]+'/'+ destIndex;
 
-    var body = '{"indices": [' + this.selectedIndexes + ']}'
-    var json = JSON.parse(body);
-
-    console.log(json);
-  
-    this.httpClient.post(endpointURL1,json, {responseType: 'text'}).subscribe(
-      (response) => {
-        console.log(response);
-        this.NotificationService.success("Succesfully Bulk Reindexed");
-        //window.location.reload()
-        return response;
-      }, (err)=>{
-        console.log(err);
-      }
-    )
-
+      this.httpClient.post(endpointURL,"", {responseType: 'text'}).subscribe(
+        (response) => {
+          console.log(response);
+          this.NotificationService.success(response);
+        }, (err)=>{
+          console.log(err);
+        }
+      )
+    }
+    this.NotificationService.success("Refresh page!");
   }
 
 }

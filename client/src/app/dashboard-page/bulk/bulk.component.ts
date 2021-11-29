@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReindexService } from 'src/app/shared/reindex.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IndexService } from 'src/app/shared/index.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-bulk',
@@ -10,7 +11,7 @@ import { IndexService } from 'src/app/shared/index.service';
 })
 export class BulkComponent implements OnInit {
 
-  constructor(public service: ReindexService, public indexService: IndexService, public dialogRef:MatDialogRef<BulkComponent>) { }
+  constructor(public service: ReindexService, public NotificationService: NotificationService, public indexService: IndexService, public dialogRef:MatDialogRef<BulkComponent>) { }
 
   option;
   dis = [];
@@ -33,13 +34,11 @@ export class BulkComponent implements OnInit {
     this.service.initializeFormGroup();
   }
 
-  onBulk(){
+  async onBulk(){
     if(this.service.form.valid){
       if(this.checked){
         this.service.bulkReindexv2(this.service.form.value.destIndex, this.service.form.value.optSettings);
-        //console.log(this.service.form.value.destIndex);
-      }else{
-        //console.log(this.service.form.value.destIndex);
+      } else {
         this.service.bulkReindex(this.service.form.value.destIndex);
       }
       this.service.form.reset();

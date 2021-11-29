@@ -33,6 +33,7 @@ export class IndexListComponent implements OnInit {
         this.listData = new MatTableDataSource(<any>data);
         this.listData.sort = this.sort;
       });
+      
   }
 
   onAddNew(){
